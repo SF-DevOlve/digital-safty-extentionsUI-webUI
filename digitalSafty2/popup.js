@@ -2,12 +2,23 @@
 
  
 document.addEventListener('DOMContentLoaded', function() {
-    const activateButton = document.getElementById('activateButton');
-    
+    var activateButton = document.getElementById('activateButton');
+
     activateButton.addEventListener('click', function() {
-        chrome.tabs.create({ url: 'activation.html' });
+        chrome.tabs.create({url: 'http://localhost:3000/'});
+    });
+
+    var logTabButton = document.getElementById('logTabButton');
+    logTabButton.addEventListener('click', function() {
+        // Action for logging the current tab
+    });
+
+    var displayContentButton = document.getElementById('displayContentButton');
+    displayContentButton.addEventListener('click', function() {
+        // Action for scanning email content
     });
 });
+
 
 //log the current tab in the button of logTab buttun 
 document.addEventListener('DOMContentLoaded', function() {
@@ -62,26 +73,50 @@ document.addEventListener('DOMContentLoaded', function() {
     displayContentButton.addEventListener('click', function() {
         chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
             const currentTabId = tabs[0].id;
-            chrome.scripting.executeScript({
-                target: { tabId: currentTabId },
-                function: injectScript // Call a function to inject the script
-            });
+            const currentTabUrl = tabs[0].url;
+            if (isEmailTab(currentTabUrl)) {
+                chrome.scripting.executeScript({
+                    target: { tabId: currentTabId },
+                    function: injectEmailScript
+                });
+            } else {
+                chrome.scripting.executeScript({
+                    target: { tabId: currentTabId },
+                    function: injectFullPageScript
+                });
+            }
         });
     });
 
-    // Function to be injected as a content script
-    function injectScript() {
-        // Find the container element that holds the email content
+    function isEmailTab(url) {
+        // Implement your logic to check if the URL represents an email page
+        // For example, you can check if the URL contains "mail.google.com" or any other pattern
+        return url.includes("mail.google.com");
+    }
+
+    // Function to be injected when the current tab is an email page
+    function injectEmailScript() {
         const emailContainer = document.querySelector('.adn.ads');
         if (emailContainer) {
-            // Extract the plain text content of the email
+            
             const emailText = emailContainer.innerText;
-            // Send the content to the background script
-            chrome.runtime.sendMessage({ action: "sendPageContent", content: emailText });
+            const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
+            const emails = emailText.match(emailRegex);
+            if (emails && emails.length > 0) {
+                const emailAdress = emails[0];
+                chrome.runtime.sendMessage({ action: "sendPageContent", content: {email_adress: emailAdress , email_content: emailText} });
+            } else {
+                console.error('No email address found.');
+            }
         } else {
             console.error('Email container not found.');
         }
     }
+    
+
+    // Function to be injected when the current tab is not an email page
+    function injectFullPageScript() {
+        const content = document.documentElement.outerHTML;
+        chrome.runtime.sendMessage({ action: "sendPageContent", content: content });
+    }
 });
-
-

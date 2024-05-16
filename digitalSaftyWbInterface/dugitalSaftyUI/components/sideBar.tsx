@@ -5,12 +5,24 @@ export const Sidebar = () => {
 
 	return (
 		<aside id="default-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 text-bold " aria-label="Sidebar" >
+
+         
    <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 p-10 " style={
 	{
 		fontWeight: "1000",
 	}
 }>
-      <ul className="space-y-2 font-medium" style={{ marginTop: "120px" , fontWeight: "700",}}>
+
+<div className="flex items-center text-center justfy-center" style={
+    {
+        marginLeft: "35px",
+    }
+}>
+                <img 
+                        style={{ width: "130px", height: "85px" }}
+                src="image.png" alt="ai-shield" />
+            </div>
+      <ul className="space-y-2 font-medium pl-4" style={{ marginTop: "50px" , fontWeight: "700",}}>
          <li>
             <a href="/email-adress-input" className="flex items-center p-2 text-red-500 rounded-lg dark:text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700 group">
                <svg className="w-5 h-5 text-red-500 transition duration-75 dark:text-red-500 group-hover:text-red-700 dark:group-hover:text-red-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">

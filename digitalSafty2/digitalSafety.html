@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Safety Extension</title>
+    <title>AI-Sheild Extension</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,13 +17,14 @@
 
         h1 {
             font-size: 24px;
-            color: #4CAF50;
+            /* danger color  */
+            color: #f44336;
             margin-bottom: 10px;
         }
 
         p {
             font-size: 16px;
-            color: #333;
+            color: black;
             margin-bottom: 20px;
         }
 
@@ -33,7 +34,7 @@
             padding: 10px 20px;
             font-size: 16px;
             color: white;
-            background-color: #4CAF50;
+            background-color: #f44336;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -42,20 +43,20 @@
         }
 
         .button:hover {
-            background-color: #45a049;
+            background-color: black;
         }
     </style>
 </head>
 <body>
     <div id="popup">
-        <h1>Digital Safety Extension</h1>
+        <h1>AI-Sheild Extension</h1>
         <p>Protecting you from phishing attacks and cyber threats.</p>
-        <button class="button" id="activateButton">Activate Extension for URLs</button>
+        <button class="button" id="activateButton">Manual phishing/vishing detection</button>
         <button class="button" id="logTabButton">Log Tab</button>
-        <button class="button" id="scanPageButton">Scan Page</button>
+        <!-- <button class="button" id="scanPageButton">Scan Page</button> -->
 
         <!-- displayContentButton -->
-        <button class="button" id="displayContentButton">Display Content</button>
+        <button class="button" id="displayContentButton">Scan Email</button>
     </div>
 
     <script src="popup.js"></script>

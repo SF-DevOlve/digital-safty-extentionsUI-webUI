@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Textarea } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
 export const DocumentInputs = () => {
@@ -12,12 +12,15 @@ export const DocumentInputs = () => {
                     </h1>
                 </CardHeader>
                 <CardBody className="overflow-visible py-2">
-                    <div className="flex flex-col gap-4 text-danger">
-                        <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
-                            <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                                <Textarea label="Document content" rows={4} />
-                            </div>
-                        </div>
+                                    <div className="mb-3">
+                    <label
+                        
+                        className="mb-2 inline-block text-neutral-500 dark:text-neutral-400"
+                        >Large file input example</label>
+                    <input
+                        className="relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-[0.32rem] text-base font-normal leading-[2.15] text-surface transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:me-3 file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-e file:border-solid file:border-inherit file:bg-transparent file:px-3  file:py-[0.32rem] file:text-surface focus:border-primary focus:text-gray-700 focus:shadow-inset focus:outline-none dark:border-white/70 dark:text-white  file:dark:text-white"
+                        id="formFileLg"
+                        type="file" />
                     </div>
                 </CardBody>
                 <div className="flex flex-col items-center justify-center mt-5">
