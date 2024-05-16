@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activation Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 300px;
+            padding: 10px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 18px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        #activateButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #activateButton:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Activate Extension for URLs</h1>
+    <form id="activationForm">
+        <label for="acceptTerms">
+            <input type="checkbox" id="acceptTerms" required>
+            I accept the terms and conditions
+        </label>
+        <button type="submit" id="activateButton">Activate Extension</button>
+    </form>
+</body>
+</html>

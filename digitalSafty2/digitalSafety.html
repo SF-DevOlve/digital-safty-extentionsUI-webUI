@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Safety Extension</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 300px;
+            padding: 10px;
+        }
+
+        #popup {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="popup">
+        <h1>Digital Safety Extension</h1>
+        <p>Protecting you from phishing attacks and cyber threats.</p>
+        <button class="button" id="activateButton">Activate Extension for URLs</button>
+        <button class="button" id="logTabButton">Log Tab</button>
+        <button class="button" id="scanPageButton">Scan Page</button>
+
+        <!-- displayContentButton -->
+        <button class="button" id="displayContentButton">Display Content</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
