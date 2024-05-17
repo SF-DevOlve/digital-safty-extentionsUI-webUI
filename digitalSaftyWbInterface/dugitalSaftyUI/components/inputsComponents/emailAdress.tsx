@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Input } from "@nextui-org/react";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
@@ -20,7 +20,7 @@ export const EmailAdressInputs = () => {
     // Fetch a request to the backend
     const checkEmailContent = async () => {
         try {
-            const response = await fetch("http://192.168.1.100:5000/api/", {
+            const response = await fetch("http://127.0.0.1:5000/api/", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -28,17 +28,19 @@ export const EmailAdressInputs = () => {
             });
             if (response.ok) {
                 const data = await response.json();
-                setResponseOutput(data);
-                console.log(data);
+                 console.log(data);
+                setResponseOutput(data.message);
+                console.log("responseOutput:", responseOutput);
+                 
             } else {
                 console.error("Failed to fetch data:", response.statusText);
             }
         } catch (error) {
             console.error("Error:", error);
         }
-        
     };
 
+    
     return (
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <Card className="p-10">
