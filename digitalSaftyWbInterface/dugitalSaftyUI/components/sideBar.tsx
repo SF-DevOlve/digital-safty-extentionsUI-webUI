@@ -56,6 +56,17 @@ export const Sidebar = () => {
                <span className="flex-1 ms-3 whitespace-nowrap">Document</span>
             </a>
          </li>
+         <li>
+            <a href="/vishing-detection" className="flex items-center p-2 text-red-500 rounded-lg dark:text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700 group">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-red-500 transition duration-75 dark:text-red-500 group-hover:text-red-700 dark:group-hover:text-red-700 icon" aria-hidden="true"  fill="currentColor" viewBox="0 0 384 512"  >
+   
+  <path className="cls-1" d="M96 96V256c0 53 43 96 96 96s96-43 96-96H208c-8.8 0-16-7.2-16-16s7.2-16 16-16h80V192H208c-8.8 0-16-7.2-16-16s7.2-16 16-16h80V128H208c-8.8 0-16-7.2-16-16s7.2-16 16-16h80c0-53-43-96-96-96S96 43 96 96z"/>
+  <path className="cls-2" d="M320 240v16c0 70.7-57.3 128-128 128s-128-57.3-128-128V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h144c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v24z"/>
+</svg>
+
+               <span className="flex-1 ms-3 whitespace-nowrap">Voice</span>
+            </a>
+         </li>
       </ul>
       
    </div>
