@@ -1,7 +1,8 @@
-"useclient";
+"use client";
 import React, { useState } from 'react';
 import { Button, Input } from "@nextui-org/react";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
+
 
 export const UrlInputs = () => {
     const [url, setUrl] = useState("");
@@ -13,11 +14,17 @@ export const UrlInputs = () => {
         setUrl(e.target.value);
     };
 
-    async function localDNSResolution(domain: string) {
+    const localDNSResolution = async (domain: string) => {
         try {
-            const ipAddresses = await dns.promises.resolve(domain);
-            return ipAddresses[0];
+            const response = await fetch(`https://dns.google/resolve?name=${domain}&type=A`);
+            const data = await response.json();
+            if (data.Status === 0 && data.Answer && data.Answer.length > 0) {
+                return data.Answer[0].data;
+            } else {
+                return null;
+            }
         } catch (error) {
+            console.error("Error resolving DNS:", error);
             return null;
         }
     }
@@ -81,7 +88,7 @@ export const UrlInputs = () => {
                 </div>
                 <div className="flex items-center justify-center mt-5 p-5">
                     <span style={{ color: isPhishing ? "red" : "green" }}>{responseOutput}</span>
-                    <span style={{ color: isDNSPhishing ? "red" : "green" }}>{isDNSPhishing ? "DNS Phishing" : "Not DNS Phishing"}</span>
+                    <span style={{ color: isDNSPhishing ? "red" : "green" }}></span>
                 </div>
             </Card>
         </div>

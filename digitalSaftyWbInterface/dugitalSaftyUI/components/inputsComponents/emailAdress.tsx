@@ -1,14 +1,15 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Input } from "@nextui-org/react";
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
-export const EmailAdressInputs = () => {
+export const EmailAddressInputs = () => {
     const [inputData, setInputData] = useState({
         emailContent: "",
     });
 
     const [responseOutput, setResponseOutput] = useState<string>("");
+    const [isPhishing, setIsPhishing] = useState<boolean | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputData({
@@ -17,21 +18,20 @@ export const EmailAdressInputs = () => {
         });
     };
 
-    // Fetch a request to the backend
     const checkEmailContent = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:5000/api/", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+            const formData = new FormData();
+            formData.append("email", inputData.emailContent);
+
+            const response = await fetch("http://127.0.0.1:5000/api/email/email-phishing", {
+                method: "POST",
+                body: formData,
             });
+
             if (response.ok) {
                 const data = await response.json();
-                 console.log(data);
-                setResponseOutput(data.message);
-                console.log("responseOutput:", responseOutput);
-                 
+                setIsPhishing(data.phishing === 1);
+                setResponseOutput(data.phishing === 1 ? "Phishing" : "Not Phishing");
             } else {
                 console.error("Failed to fetch data:", response.statusText);
             }
@@ -40,7 +40,6 @@ export const EmailAdressInputs = () => {
         }
     };
 
-    
     return (
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
             <Card className="p-10">
@@ -53,7 +52,7 @@ export const EmailAdressInputs = () => {
                     <div className="flex flex-col gap-4 text-danger">
                         <div className="flex w-full flex-wrap md:flex-nowrap mb-6 md:mb-0 gap-4">
                             <div className="flex w-full flex-wrap md:flex-nowrap gap-4">
-                                <Input 
+                                <Input
                                     type="text"
                                     label="Email address"
                                     name="emailContent"
@@ -70,7 +69,7 @@ export const EmailAdressInputs = () => {
                     </Button>
                 </div>
                 <div className="flex items-center justify-center mt-5 p-5">
-                    {responseOutput}
+                    <span style={{ color: isPhishing ? "red" : "green" }}>{responseOutput}</span>
                 </div>
             </Card>
         </div>
