@@ -5,7 +5,9 @@ import { Card, CardHeader, CardBody } from "@nextui-org/react";
 
 export const DocumentInputs = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
+    const [response, setResponse] = useState<number | null>(null);
+    const [emails , setEmails] = useState<string[]>([]);
+    const [urls , setUrls] = useState<string[]>([]);
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             setSelectedFile(e.target.files[0]);
@@ -16,20 +18,22 @@ export const DocumentInputs = () => {
         if (selectedFile) {
             try {
                 const formData = new FormData();
-                formData.append('file', selectedFile);
+                formData.append('pdf', selectedFile);
 
-                const response = await fetch("http://localhost:5000/check-document-content", {
+                const response = await fetch("http://localhost:5000/api/document/pdf/", {
                     method: "POST",
                     body: formData,
                 });
                 const data = await response.json();
                 console.log(data);
+                setResponse(data.phishing); // Assuming the response is an object with a 'phishing' property
+                setEmails(data.emails);
+                setUrls(data.urls);
             } catch (error) {
                 console.error('Error checking document:', error);
             }
         } else {
             console.error('No file selected.');
-        console.log("file selected : ", selectedFile);
         }
     };
 
@@ -58,6 +62,13 @@ export const DocumentInputs = () => {
                     <Button color="danger" variant="bordered" onClick={handleCheckDocument}>
                         Check
                     </Button>
+                </div>
+                <div className="flex items-center justify-center mt-5 p-5">
+                    <span style={{ color: response === 1 ? "red" : "green" }}>
+                        {response === 1 ? "Phishing" : "Not Phishing"}
+                        {emails.map((email, index) => ( <p key={index}>{email}</p> ))}
+                    {urls.map((url, index) => ( <p key={index}>{url}</p> ))}
+                    </span>
                 </div>
             </Card>
         </div>

@@ -71,7 +71,7 @@ export const VishingDetection = () => {
             langue: selectedLanguage,
         };
 
-        fetch('http://localhost:5000/voicebot', {
+        fetch('http://localhost:5000/api/perform_action', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
